@@ -6,4 +6,4 @@ Change log:
 
 *2023/5/9*
 - Set up repo (FSO-10.1)
-- 
+- Set up linting (FSO-10.2) --Submission part 1
