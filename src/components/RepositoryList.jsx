@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 
-
 const repositories = [
   {
     id: 'jaredpalmer.formik',
