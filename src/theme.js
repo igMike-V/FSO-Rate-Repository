@@ -19,6 +19,11 @@ const theme = {
     normal: "400",
     bold: "700",
   },
+  borders: {
+    buttonRadius: 5,
+    weight: 2,
+    color: "#d3d8de",
+  },
 };
 
 export default theme;
