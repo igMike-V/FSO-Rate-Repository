@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 })
 
 const AppBarTab = ({ label, linkString }) => {
-  console.log(label)
   return (
     <Pressable>
       <Link to={linkString} >
