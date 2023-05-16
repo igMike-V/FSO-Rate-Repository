@@ -1,8 +1,9 @@
 import { Pressable, View, StyleSheet } from 'react-native';
 import FormikTextInput from './FormikTextInput';
-import { Formik, useField } from 'formik';
+import { Formik } from 'formik';
 import Text from './Text';
 import theme from '../theme';
+import * as yup from 'yup';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,20 +13,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     padding: 30,
     borderRadius: theme.borders.buttonRadius,
+    marginTop: 20,
   },
   buttonText: {
     textAlign: 'center',
     color: theme.colors.lightText,
     fontSize: theme.fontSizes.heading,
     fontWeight: theme.fontWeights.bold,
-  },
-  input: {
-    borderColor: theme.borders.color,
-    borderRadius: theme.borders.buttonRadius,
-    borderWidth: theme.borders.weight,
-    padding: 30,
-    marginBottom: 20,
-    fontSize: theme.fontSizes.heading,
   },
 });
 
@@ -34,14 +28,25 @@ const initialValues = {
   password: "",
 };
 
-const SignInForm = ({ onSubmit }) => {
-  const [userField, userMeta, userHelpers] = useField('username');
-  const [passField, passMeta, passHelpers] = useField('password');
+const validationSchema = yup.object().shape({
+  username: yup.string()
+    .required('Username is Required'),
+  password: yup.string()
+    .required('Password is Required'),
+});
 
+const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput style={styles.input} name="username" placeholder="username" />
-      <FormikTextInput style={styles.input} name="password" placeholder="password" secureTextEntry={true} />
+      <FormikTextInput
+        name="username"
+        placeholder="Username"
+      />
+      <FormikTextInput
+        name="password"
+        placeholder="Password"
+        secureTextEntry={true}
+      />
       <Pressable style={styles.button} onPress={onSubmit}>
         <Text style={styles.buttonText}>Sign In</Text>
       </Pressable>
@@ -55,7 +60,11 @@ const SignIn = () => {
    console.log(values);
   }
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
