@@ -8,8 +8,6 @@ const useRepositories = () => {
 
   if (loading) return { loading };
 
-  console.log("data:", data.repositories);
-
   return {
     repositories: data ? data.repositories : [],
     loading,
