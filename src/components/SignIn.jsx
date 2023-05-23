@@ -59,13 +59,11 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-  const authStorage = new AuthStorage()
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const response = await signIn({ username, password });
       const token = response.data.authenticate.accessToken
-      authStorage.setAccessToken(token)
       console.log(token)
     } catch (e) {
       console.log(e)
