@@ -5,6 +5,7 @@ import Text from './Text';
 import theme from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import AuthStorage from '../utils/authStorage';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,11 +59,13 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const authStorage = new AuthStorage()
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const response = await signIn({ username, password });
       const token = response.data.authenticate.accessToken
+      authStorage.setAccessToken(token)
       console.log(token)
     } catch (e) {
       console.log(e)
