@@ -1,7 +1,8 @@
 {
   "cSpell.words": [
     "Formik",
-    "Pressable"
+    "Pressable",
+    "signout"
   ],
   "cSpell.ignoreWords": ["signin"]
 }

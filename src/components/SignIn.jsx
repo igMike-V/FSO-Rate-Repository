@@ -58,18 +58,19 @@ const SignInForm = ({ onSubmit }) => {
 }
 
 const SignIn = () => {
-  const [signIn] = useSignIn();
+  const [signIn, result] = useSignIn();
   const navigate = useNavigate();
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const response = await signIn({ username, password });
+      console.log('result', result)
       if (response) {
         console.log('signin response', response)
         navigate('/');
       }
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
 

@@ -22,4 +22,11 @@ export const GET_REPOSITORIES = gql`
   }
 `;
 
-// other queries...
+export const ME = gql`
+  query Me {
+    me {
+      username
+      id
+    }
+  }
+`;

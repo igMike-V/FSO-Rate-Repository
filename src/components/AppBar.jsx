@@ -3,6 +3,8 @@ import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
 import { ScrollView } from 'react-native';
+import AppBarUserTab from './AppBarUserTab';
+
 
 
 const styles = StyleSheet.create({
@@ -23,13 +25,8 @@ const AppBar = () => {
           label="Repositories"
           link="/"
         />
-
-        <AppBarTab
-          label="Sign in"
-          link="/signin"
-        />
+        <AppBarUserTab />
       </ScrollView>
-     
     </View>
   )
 }
