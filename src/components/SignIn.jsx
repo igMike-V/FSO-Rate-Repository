@@ -11,17 +11,17 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
   },
-  button: {
-    backgroundColor: theme.colors.primary,
-    padding: 30,
-    borderRadius: theme.borders.buttonRadius,
-    marginTop: 20,
-  },
   buttonText: {
     textAlign: "center",
     color: theme.colors.lightText,
     fontSize: theme.fontSizes.heading,
     fontWeight: theme.fontWeights.bold,
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    padding: 30,
+    borderRadius: theme.borders.buttonRadius,
+    marginTop: 20,
   },
 });
 
@@ -70,13 +70,11 @@ const SignIn = () => {
     const { username, password } = values;
     try {
       const response = await signIn({ username, password });
-      console.log("result", result);
       if (response) {
-        console.log("signin response", response);
         navigate("/");
       }
     } catch (e) {
-      console.error(e);
+      console.error(e, result);
     }
   };
 

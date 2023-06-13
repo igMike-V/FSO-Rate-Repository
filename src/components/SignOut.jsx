@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Text from "./Text";
 
 const SignOut = () => {
-  console.log("signout Clicked");
   const [signOut] = useSignOut();
   const navigate = useNavigate();
 
