@@ -6,6 +6,7 @@ const theme = {
     textSecondary: "#586069",
     primary: "#0366d6",
     bgDark: "#24292e",
+    bgLight: "#eeeeee",
     appBarText: "#ffffff",
     lightText: "#ffffff",
     error: "#d73a4a",
