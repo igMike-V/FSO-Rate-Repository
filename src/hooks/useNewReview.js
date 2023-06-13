@@ -15,7 +15,6 @@ const useNewReview = () => {
           review: { repositoryName, ownerName, rating, text },
         },
       });
-      console.log("data in useNewReview Hook", data);
       //const repositoryId = data.data.createReview.repositoryId;
       return data;
     } catch (e) {

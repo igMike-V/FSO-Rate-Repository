@@ -4,6 +4,7 @@ import AppBarTab from "./AppBarTab";
 import theme from "../theme";
 import { ScrollView } from "react-native";
 import AppBarUserTab from "./AppBarUserTab";
+import AppBarSignUpTab from "./AppBarSignUpTab";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +23,7 @@ const AppBar = () => {
         <AppBarTab label="Repositories" link="/" />
         <AppBarTab label="Create a review" link="/review" />
         <AppBarUserTab />
+        <AppBarSignUpTab />
       </ScrollView>
     </View>
   );

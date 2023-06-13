@@ -5,6 +5,7 @@ import AppBar from "./AppBar";
 import RepositoryList from "./RepositoryList";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
+import SignUp from "./SignUp";
 import SingleRepository from "./SingleRepository";
 import NewReview from "./NewReview";
 
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path="/repository/:id" element={<SingleRepository />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signout" element={<SignOut />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/review" element={<NewReview />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
