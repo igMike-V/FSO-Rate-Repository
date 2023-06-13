@@ -76,7 +76,7 @@ const NewReview = () => {
     const { repoOwner, repoName, rating, review } = values;
     try {
       const data = await newReview({
-        review: review,
+        text: review,
         rating: Number(rating),
         repositoryName: repoName,
         ownerName: repoOwner,
