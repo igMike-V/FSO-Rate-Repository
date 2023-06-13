@@ -7,7 +7,7 @@ import { ME } from "../graphql/queries";
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: "24px",
+    fontSize: theme.fontSizes.subheading,
     color: theme.colors.appBarText,
     paddingRight: 20,
   },
