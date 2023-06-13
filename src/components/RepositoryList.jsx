@@ -3,6 +3,7 @@ import useRepositories from "../hooks/useRepositories";
 import RepositoryItem from "./RepositoryItem";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
+import { Searchbar } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     backgroundColor: "#cccccc",
+    marginTop: 10,
   },
 });
 
@@ -30,29 +32,62 @@ const pickerData = [
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const PickerComponent = ({ setFilter }) => {
+const PickerComponent = ({ filter, setFilter }) => {
   const [value, setValue] = useState("latest");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+    setTimeout(() => {
+      setFilter({
+        ...filter,
+        searchKeyword: searchQuery,
+      });
+    }, 500);
+  };
 
   const handleChange = (value) => {
     setValue(value);
     switch (value.value) {
       case "latest":
-        setFilter({ orderBy: "CREATED_AT", orderDirection: "DESC" });
+        setFilter({
+          ...filter,
+          orderBy: "CREATED_AT",
+          orderDirection: "DESC",
+        });
         break;
       case "highest":
-        setFilter({ orderBy: "RATING_AVERAGE", orderDirection: "DESC" });
+        setFilter({
+          ...filter,
+          orderBy: "RATING_AVERAGE",
+          orderDirection: "DESC",
+        });
         break;
       case "lowest":
-        setFilter({ orderBy: "RATING_AVERAGE", orderDirection: "ASC" });
+        setFilter({
+          ...filter,
+          orderBy: "RATING_AVERAGE",
+          orderDirection: "ASC",
+        });
         break;
       default:
-        setFilter({ orderBy: "CREATED_AT", orderDirection: "DESC" });
+        setFilter({
+          ...filter,
+          orderBy: "CREATED_AT",
+          orderDirection: "DESC",
+        });
         break;
     }
   };
 
   return (
     <View style={styles.container}>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+        onClearIconPress={() => onChangeSearch("")}
+      />
       <Dropdown
         data={pickerData}
         value={value}
@@ -65,7 +100,11 @@ const PickerComponent = ({ setFilter }) => {
   );
 };
 
-export const RepositoryListContainer = ({ repositories, setFilter }) => {
+export const RepositoryListContainer = ({
+  repositories,
+  setFilter,
+  filter,
+}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -79,7 +118,9 @@ export const RepositoryListContainer = ({ repositories, setFilter }) => {
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItems}
-      ListHeaderComponent={<PickerComponent setFilter={setFilter} />}
+      ListHeaderComponent={
+        <PickerComponent setFilter={setFilter} filter={filter} />
+      }
     />
   );
 };
@@ -91,6 +132,7 @@ const RepositoryList = () => {
     <RepositoryListContainer
       repositories={repositories}
       setFilter={setFilter}
+      filter={filter}
     />
   );
 };
