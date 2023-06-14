@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     padding: 20,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
   },
   ratingText: {
     color: theme.colors.primary,
@@ -61,6 +60,13 @@ const styles = StyleSheet.create({
 });
 
 const Review = ({ review }) => {
+  let reviewHeading = "";
+  if ("repository" in review) {
+    reviewHeading = review.repository.fullName;
+  } else {
+    reviewHeading = review.user.username;
+  }
+
   console.log("theReview:", review);
   return (
     <View style={styles.ratingContainer}>
@@ -68,7 +74,7 @@ const Review = ({ review }) => {
         <Text style={styles.ratingText}>{review.rating}</Text>
       </View>
       <View style={styles.ratingInfo}>
-        <Text style={styles.reviewUser}>{review.user.username}</Text>
+        <Text style={styles.reviewUser}>{reviewHeading}</Text>
         <Text style={styles.reviewDate}>{convertDate(review.createdAt)}</Text>
         <Text>{review.text}</Text>
       </View>

@@ -103,6 +103,7 @@ export const ME = gql`
               id
               name
               ownerName
+              fullName
             }
             rating
             createdAt
