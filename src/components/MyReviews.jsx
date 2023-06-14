@@ -1,9 +1,10 @@
-import { View, StyleSheet, FlatList, Pressable } from "react-native";
+import { View, StyleSheet, FlatList, Pressable, Alert } from "react-native";
 import { useNavigate } from "react-router-native";
 import useMe from "../hooks/useMe";
 import Text from "./Text";
 import Review from "./Review";
 import theme from "../theme";
+import useDeleteReview from "../hooks/useDeleteReview";
 
 const styles = StyleSheet.create({
   container: {
@@ -51,8 +52,37 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const ReviewContainer = ({ review }) => {
+const ReviewContainer = ({ review, refetch }) => {
   const navigate = useNavigate();
+  const [deleteReview] = useDeleteReview();
+
+  const deleteAlert = async () => {
+    Alert.alert(
+      "Delete review",
+      "Are you sure you want to delete this review?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            console.log("Delete pressed");
+            try {
+              const deleteSuccess = deleteReview(review.id);
+              if (deleteSuccess) {
+                refetch();
+                //navigate("/my-reviews");
+              }
+            } catch (e) {
+              console.log(e);
+            }
+          },
+        },
+      ]
+    );
+  };
 
   const handleLinkPress = () => {
     navigate(`/repository/${review.repository.id}`);
@@ -65,10 +95,7 @@ const ReviewContainer = ({ review }) => {
         <Pressable style={styles.buttonLeft} onPress={handleLinkPress}>
           <Text style={styles.buttonText}>View repository</Text>
         </Pressable>
-        <Pressable
-          style={styles.buttonRight}
-          onPress={() => console.log("pressed delete")}
-        >
+        <Pressable style={styles.buttonRight} onPress={deleteAlert}>
           <Text style={styles.buttonText}>Delete review</Text>
         </Pressable>
       </View>
@@ -77,7 +104,10 @@ const ReviewContainer = ({ review }) => {
 };
 
 const MyReviews = () => {
-  const user = useMe(true).me;
+  const me = useMe(true);
+  const user = me.me;
+  const refetch = me.refetch;
+  console.log(me);
   if (!user)
     return (
       <View style={styles.container}>
@@ -94,7 +124,9 @@ const MyReviews = () => {
     <View style={styles.container}>
       <FlatList
         data={reviews}
-        renderItem={({ item }) => <ReviewContainer review={item} />}
+        renderItem={({ item }) => (
+          <ReviewContainer review={item} refetch={refetch} />
+        )}
         keyExtractor={({ id }) => id}
         ItemSeparatorComponent={ItemSeparator}
       />

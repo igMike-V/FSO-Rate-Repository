@@ -6,7 +6,7 @@ const useMe = (getReviews) => {
   if (getReviews) {
     includesReviews = getReviews;
   }
-  const { loading, error, data } = useQuery(ME, {
+  const { loading, error, data, refetch } = useQuery(ME, {
     fetchPolicy: "cache-and-network",
     variables: { includesReviews },
   });
@@ -17,6 +17,7 @@ const useMe = (getReviews) => {
   return {
     me: data ? data.me : [],
     loading,
+    refetch,
   };
 };
 
