@@ -5,7 +5,7 @@ import { useParams } from "react-router-native";
 import Text from "./Text";
 import theme from "../theme";
 import * as Linking from "expo-linking";
-import { convertDate } from "../utils/dateHelpers";
+import Review from "./Review";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,45 +27,6 @@ const styles = StyleSheet.create({
     height: 10,
     backgroundColor: theme.colors.bgLight,
   },
-  ratingValueContainer: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    borderColor: theme.colors.primary,
-    borderWidth: 3,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 20,
-  },
-  ratingContainer: {
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  ratingText: {
-    color: theme.colors.primary,
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.subheading,
-  },
-  ratingInfo: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    flexShrink: 1,
-  },
-  reviewUser: {
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.subheading,
-    paddingBottom: 2,
-  },
-  reviewDate: {
-    fontSize: theme.fontSizes.subheading,
-    color: theme.colors.textSecondary,
-    paddingBottom: 5,
-  },
 });
 
 const RepositoryInfo = ({ repository }) => {
@@ -86,22 +47,6 @@ const RepositoryInfo = ({ repository }) => {
   );
 };
 
-const ReviewItem = ({ review }) => {
-  console.log("theReview:", review);
-  return (
-    <View style={styles.ratingContainer}>
-      <View style={styles.ratingValueContainer}>
-        <Text style={styles.ratingText}>{review.rating}</Text>
-      </View>
-      <View style={styles.ratingInfo}>
-        <Text style={styles.reviewUser}>{review.user.username}</Text>
-        <Text style={styles.reviewDate}>{convertDate(review.createdAt)}</Text>
-        <Text>{review.text}</Text>
-      </View>
-    </View>
-  );
-};
-
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const SingleRepository = () => {
@@ -117,7 +62,7 @@ const SingleRepository = () => {
   return (
     <FlatList
       data={reviews}
-      renderItem={({ item }) => <ReviewItem review={item.node} />}
+      renderItem={({ item }) => <Review review={item.node} />}
       keyExtractor={(item) => item.node.id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
       ItemSeparatorComponent={ItemSeparator}

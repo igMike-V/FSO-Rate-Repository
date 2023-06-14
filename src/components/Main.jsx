@@ -8,6 +8,7 @@ import SignOut from "./SignOut";
 import SignUp from "./SignUp";
 import SingleRepository from "./SingleRepository";
 import NewReview from "./NewReview";
+import MyReviews from "./MyReviews";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,10 +24,11 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="/repository/:id" element={<SingleRepository />} />
+        <Route path="/review" element={<NewReview />} />
+        <Route path="/my-reviews" element={<MyReviews />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/review" element={<NewReview />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>
