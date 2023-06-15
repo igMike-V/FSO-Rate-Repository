@@ -10,7 +10,7 @@ https://fullstackopen.com/en/part10/introduction_to_react_native
 Install dependencies
 ```npm install --legacy-peer-deps '''
 Start metro:
-``` npm start ``
+``` npm start ```
 
 Change log:
 
