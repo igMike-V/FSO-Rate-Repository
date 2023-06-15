@@ -5,11 +5,15 @@ export const GET_REPOSITORIES = gql`
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
     $searchKeyword: String
+    $after: String
+    $first: Int
   ) {
     repositories(
       orderBy: $orderBy
       orderDirection: $orderDirection
       searchKeyword: $searchKeyword
+      after: $after
+      first: $first
     ) {
       edges {
         cursor
@@ -25,6 +29,12 @@ export const GET_REPOSITORIES = gql`
           stargazersCount
           ownerAvatarUrl
         }
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
       }
     }
   }

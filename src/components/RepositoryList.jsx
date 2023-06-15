@@ -102,6 +102,7 @@ const PickerComponent = ({ filter, setFilter }) => {
 
 export const RepositoryListContainer = ({
   repositories,
+  onEndReach,
   setFilter,
   filter,
 }) => {
@@ -121,18 +122,27 @@ export const RepositoryListContainer = ({
       ListHeaderComponent={
         <PickerComponent setFilter={setFilter} filter={filter} />
       }
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
 
 const RepositoryList = () => {
   const [filter, setFilter] = useState("latest");
-  const { repositories } = useRepositories(filter);
+  const { repositories, fetchMore } = useRepositories({ ...filter, first: 8 });
+
+  const onEndReach = () => {
+    console.log("You have reached the end of the list");
+    fetchMore();
+  };
+
   return (
     <RepositoryListContainer
       repositories={repositories}
       setFilter={setFilter}
       filter={filter}
+      onEndReach={onEndReach}
     />
   );
 };
