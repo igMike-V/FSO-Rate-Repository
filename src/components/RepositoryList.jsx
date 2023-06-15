@@ -130,7 +130,7 @@ export const RepositoryListContainer = ({
 
 const RepositoryList = () => {
   const [filter, setFilter] = useState("latest");
-  const { repositories, fetchMore } = useRepositories({ ...filter, first: 8 });
+  const { repositories, fetchMore } = useRepositories({ ...filter, first: 3 });
 
   const onEndReach = () => {
     console.log("You have reached the end of the list");
