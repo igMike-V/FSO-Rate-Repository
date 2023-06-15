@@ -8,7 +8,7 @@ https://fullstackopen.com/en/part10/introduction_to_react_native
 - You will also need the Backend repo from FullStackOpen: https://github.com/fullstack-hy2020/rate-repository-api
 
 Install dependencies
-```npm install --legacy-peer-deps '''
+```npm install --legacy-peer-deps  ```
 Start metro:
 ``` npm start ```
 
