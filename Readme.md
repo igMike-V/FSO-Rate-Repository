@@ -3,6 +3,15 @@
 ### Project for Full Stack Open as of May 2022
 https://fullstackopen.com/en/part10/introduction_to_react_native
 
+#### To run :
+- Set node version to 16.19.0
+- You will also need the Backend repo from FullStackOpen: https://github.com/fullstack-hy2020/rate-repository-api
+
+Install dependencies
+```npm install --legacy-peer-deps '''
+Start metro:
+``` npm start ``
+
 Change log:
 
 *May 9 2023*
